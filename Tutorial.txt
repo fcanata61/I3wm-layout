@@ -1,0 +1,74 @@
+============================================
+Tutorial: Criar layout "Master 70% + Grid laterais" no i3wm
+============================================
+
+Este tutorial mostra como configurar o i3wm para simular um layout no estilo
+master-stack, onde a janela mestre ocupa 70% no centro, pode ter até 2 abas,
+e as demais janelas ficam organizadas nas laterais em grid.
+
+--------------------------------------------
+1) Pré-requisitos
+--------------------------------------------
+- Ter o i3wm instalado e configurado (~/.config/i3/config).
+- Saber usar as teclas padrão do i3 (Mod = tecla Windows/Super na maioria).
+
+--------------------------------------------
+2) Criar layout manualmente
+--------------------------------------------
+Passo a passo dentro do i3:
+
+1. Abra um terminal (Mod+Enter).
+2. Divida o container principal em colunas (Mod+v).
+3. Abra mais dois terminais. Agora você terá 3 colunas lado a lado.
+
+   Estrutura:
+   [ esquerda ] [ centro ] [ direita ]
+
+4. Ajuste proporções:
+   - Entre em modo resize: Mod+r
+   - Use setas para aumentar o container central até ocupar ~70% da tela.
+   - Deixe esquerda e direita com ~15% cada.
+
+5. Configure o container central:
+   - Foco no container central (Mod+j/l).
+   - Transforme-o em layout tabbed (Mod+w).
+     Agora você pode abrir 2 ou mais janelas no centro como abas.
+   - Alternativamente, pode usar split horizontal (Mod+h) para ter 2 mestres lado a lado.
+
+6. Configure as laterais:
+   - Foco no container da esquerda → defina split vertical (Mod+e).
+   - Foco no container da direita → idem.
+   - Agora as janelas que forem abertas nas laterais se empilham em grid vertical.
+
+--------------------------------------------
+3) Salvar layout automático
+--------------------------------------------
+Se quiser que o layout já esteja pronto ao iniciar o i3:
+
+1. Monte o layout manualmente conforme acima.
+2. Execute no terminal:
+   i3-save-tree --workspace 1 > ~/.config/i3/layout.json
+
+3. Edite o arquivo ~/.config/i3/layout.json e ajuste proporções se necessário
+   (procure por "percent": valores próximos de 0.7 para o centro, 0.15 para lados).
+
+4. No arquivo ~/.config/i3/config adicione:
+   assign [class=".*"] → workspace 1
+   exec --no-startup-id "i3-msg 'append_layout ~/.config/i3/layout.json'"
+
+Assim, ao iniciar o i3, o workspace 1 carregará automaticamente com:
+- Mestre central (70%)
+- Até 2 janelas em abas (tabbed)
+- Laterais em grid vertical
+
+--------------------------------------------
+4) Resumo do funcionamento
+--------------------------------------------
+- Mestre = container central (70% da tela)
+- Pode ter até 2 janelas em abas (ou lado a lado)
+- Laterais recebem janelas extras em grid
+- Configuração pode ser manual (no momento) ou automática (layout.json)
+
+--------------------------------------------
+Fim do tutorial
+============================================
