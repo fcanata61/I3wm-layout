@@ -1,0 +1,106 @@
+============================================
+Tutorial: Layout "2 Mestres 70% + Grid laterais" no i3wm
+============================================
+
+Este tutorial mostra como configurar o i3wm para ter:
+- Uma área central ocupando 70% da tela
+- Até 2 janelas mestres lado a lado (split horizontal)
+- Laterais (15% cada) que recebem janelas extras em grid vertical
+
+--------------------------------------------
+1) Pré-requisitos
+--------------------------------------------
+- Ter o i3wm instalado e configurado (~/.config/i3/config).
+- Conhecer as teclas básicas (Mod = tecla Windows/Super na maioria).
+
+--------------------------------------------
+2) Criar layout manualmente
+--------------------------------------------
+Passo a passo dentro do i3:
+
+1. Abra um terminal (Mod+Enter).
+2. Divida o container principal em colunas (Mod+v).
+3. Abra mais dois terminais → você terá 3 colunas lado a lado:
+   [ esquerda | centro | direita ]
+
+4. Ajuste proporções:
+   - Entre em modo resize (Mod+r)
+   - Use as setas para aumentar o container central até ~70% da tela
+   - Deixe esquerda e direita com ~15% cada
+
+5. Configure o container central:
+   - Foco no centro (Mod+j/l)
+   - Divida em horizontal (Mod+h)
+   - Agora o centro terá 2 mestres lado a lado (cada 35% da tela)
+
+6. Configure laterais:
+   - Foco no container da esquerda → defina split vertical (Mod+e)
+   - Foco no container da direita → idem
+   - Assim, as laterais recebem janelas extras em grid vertical
+
+--------------------------------------------
+3) Criar layout automático (layout.json)
+--------------------------------------------
+Se quiser salvar o layout para abrir automaticamente:
+
+1. Crie um arquivo em:
+   ~/.config/i3/layout.json
+
+2. Coloque este conteúdo:
+
+{
+  "type": "con",
+  "orientation": "horizontal",
+  "percent": 1,
+  "nodes": [
+    {
+      "type": "con",
+      "orientation": "vertical",
+      "percent": 0.15,
+      "layout": "splitv",
+      "nodes": []
+    },
+    {
+      "type": "con",
+      "orientation": "horizontal",
+      "percent": 0.70,
+      "layout": "splith",
+      "nodes": [
+        {
+          "type": "con",
+          "percent": 0.5,
+          "layout": "splitv",
+          "nodes": []
+        },
+        {
+          "type": "con",
+          "percent": 0.5,
+          "layout": "splitv",
+          "nodes": []
+        }
+      ]
+    },
+    {
+      "type": "con",
+      "orientation": "vertical",
+      "percent": 0.15,
+      "layout": "splitv",
+      "nodes": []
+    }
+  ]
+}
+
+3. No terminal, carregue no workspace desejado:
+   i3-msg "workspace 1; append_layout ~/.config/i3/layout.json"
+
+--------------------------------------------
+4) Resumo do funcionamento
+--------------------------------------------
+- Mestre = área central (70%)
+- 2 mestres lado a lado (35% cada)
+- Laterais (15% cada) recebem janelas em grid vertical
+- Pode ser configurado manualmente ou com layout.json automático
+
+--------------------------------------------
+Fim do tutorial
+============================================
