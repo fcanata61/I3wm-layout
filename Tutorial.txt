@@ -69,6 +69,25 @@ Assim, ao iniciar o i3, o workspace 1 carregará automaticamente com:
 - Laterais recebem janelas extras em grid
 - Configuração pode ser manual (no momento) ou automática (layout.json)
 
+Para aplicar as mudanças 
+
+⚙️ Como usar
+
+1. Salve o conteúdo acima em:
+
+~/.config/i3/layout.json
+
+
+2. No terminal, aplique no workspace desejado (exemplo: workspace 1):
+
+i3-msg "workspace 1; append_layout ~/.config/i3/layout.json"
+
+
+3. Abra novas janelas:
+
+As duas primeiras que você abrir no centro ficarão em abas (ou lado a lado se mudar o layout).
+
+As demais que forem abertas nos lados ocuparão as colunas de 15% e se organizarão em grid vertical.
 --------------------------------------------
 Fim do tutorial
 ============================================
