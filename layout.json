@@ -1,0 +1,28 @@
+{
+  "type": "con",
+  "orientation": "horizontal",
+  "percent": 1,
+  "nodes": [
+    {
+      "type": "con",
+      "orientation": "vertical",
+      "percent": 0.15,
+      "layout": "splitv",
+      "nodes": []
+    },
+    {
+      "type": "con",
+      "orientation": "horizontal",
+      "percent": 0.70,
+      "layout": "tabbed",
+      "nodes": []
+    },
+    {
+      "type": "con",
+      "orientation": "vertical",
+      "percent": 0.15,
+      "layout": "splitv",
+      "nodes": []
+    }
+  ]
+}
